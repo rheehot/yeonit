@@ -1,0 +1,10 @@
+mixin navbar(title, type)
+  nav(class='navigation')
+    section(class='container')
+      a(class='navigation-title' href='/')
+        h1(class='title')= title
+      ul(class='navigation-list float-right')
+        li(class='navigation-item')
+          case type
+            when index
+              include ../shards/navitems/index
