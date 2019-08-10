@@ -5,6 +5,7 @@ mixin navbar(title, type)
         h1(class='title')= title
       ul(class='navigation-list float-right')
         li(class='navigation-item')
-          case type
-            when index
-              include ../shards/navitems/index
+          if type === 'session'
+            include ../shards/navitems/session
+          else
+            include ../shards/navitems/index

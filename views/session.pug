@@ -1,0 +1,28 @@
+extends layout/main
+
+include components/navbar
+include components/header
+include components/footer
+include shards/blankSection
+include shards/emptySection
+include shards/buttonDefault
+include shards/buttonTwitter
+include shards/textSection
+include shards/textSectionCenterialized
+include shards/imageSection
+include shards/imageSectionCenterialized
+
+block content
+  +navbar('연잇', 'session')
+  
+  +blankSection('45')
+  +textSectionCenterialized(
+    '로그인',
+    '연잇은 아직 게스트 모드 밖에 지원하지 않습니다.'
+  )
+  
+  article.center
+    div(class='container')
+      +buttonDefault('게스트로 로그인', '/session/guest', 'fas fa-user')
+
+  +footer()

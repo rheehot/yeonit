@@ -11,6 +11,12 @@
   border-color: transparent;
 }
 
+/* Brand colors */
+.button-twitter {
+  background-color: #00ACEE;
+  border-color: #00ACEE;
+}
+
 /* Custom size */
 .button-small {
   font-size: .8rem;
