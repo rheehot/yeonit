@@ -2,3 +2,9 @@ img.onpage {
   max-height: 300px;
   max-width: 400px;
 }
+img.block {
+  height: 250px;
+  width: 250px;
+
+  border: solid 1em black;
+}

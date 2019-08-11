@@ -5,9 +5,7 @@ const structures = require('../structures')
 
 router.use(structures.session.validate)
 
-router.get('/', function(req, res, next) {
-  res.render('app', { games: new Array() })
-})
+router.get('/', structures.app.main)
 
 router.use(structures.page.notFound)
 

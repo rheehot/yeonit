@@ -4,16 +4,24 @@ include components/navbar
 include components/header
 include components/footer
 include shards/blankSection
+include shards/buttonDefault
+include shards/imageSection
+include shards/imageSectionCenterialized
 include shards/textSection
 include shards/textSectionCenterialized
 
 block content
   +navbar('연잇', 'app')
-
   +blankSection('45')
-  +textSection(
-    '새 게임 시작하기',
-    '연달아 이을준비가 되셨나요? 시작해보세요!'
+
+  article
+    div.container
+      center
+        img.block(src='https://avatars0.githubusercontent.com/u/53952246')
+
+  +textSectionCenterialized(
+    '게스트 세션',
+    '게스트 세션에서는 플레이 정보가 유지되지 않습니다.'
   )
 
   article

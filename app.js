@@ -4,6 +4,8 @@ const session = require('express-session')
 const path = require('path')
 const cookieParser = require('cookie-parser')
 const logger = require('morgan')
+const uuidv4 = require('uuid/v4')
+const uuidv5 = require('uuid/v5')
 
 const indexRouter = require('./routes/index')
 const appRouter = require('./routes/app')
@@ -11,7 +13,8 @@ const sessionRouter = require('./routes/session')
 
 const app = express()
 
-// view engine setup
+app.uuid = uuidv4()
+
 app.set('views', path.join(__dirname, 'views'))
 app.set('view engine', 'pug')
 app.set('trust proxy', 1)
@@ -22,7 +25,7 @@ app.use(express.urlencoded({ extended: false }))
 app.use(cookieParser())
 app.use(express.static(path.join(__dirname, 'public')))
 app.use(session({
-  secret: 'the nyancat by seia',
+  secret: uuidv5('yeonit', app.uuid),
   resave: false,
   saveUninitialized: true,
   cookie: {
