@@ -3,6 +3,7 @@ extends layout/main
 include components/navbar
 include components/header
 include components/footer
+include shards/blankSection
 include shards/textSection
 include shards/textSectionCenterialized
 include shards/imageSection
@@ -11,7 +12,8 @@ include shards/imageSectionCenterialized
 block content
   +navbar('연잇')
   +header()
-  
+
+  +blankSection('45')
   +textSectionCenterialized(
     '아슬아슬한 그 순간',
     '이제 끝말잇기를 온라인으로 연잇에서 즐겨보세요! 온라인에서 실시간으로 줄어드는 시간 내에 생각나는 단어를 입력해야 합니다.'

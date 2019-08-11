@@ -1,20 +1,14 @@
 const express = require('express')
 const router = express.Router()
 
-router.use(function(req, res, next) {
-  if (req.session.uid) {
-    next()
-  } else {
-    res.redirect('/session')
-  }
-})
+const structures = require('../structures')
+
+router.use(structures.session.validate)
 
 router.get('/', function(req, res, next) {
   res.render('app')
 })
 
-router.use(function(req, res, next) {
-  res.status(404).end()
-})
+router.use(structures.page.notFound)
 
 module.exports = router
