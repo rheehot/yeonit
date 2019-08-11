@@ -14,12 +14,11 @@ This GitHub opensource repository is for Online word tagging game platform, Yeon
 
 # Concept
 
-Our prototype is the one of online word tagging platforms 'Kkutu'.
-However, to improve the outline of the game and in-game experience, I thought I need to build a new word tagging game platform.
+Our prototype is the one of online word tagging platforms 'Kkutu'. However, to improve the outline of the game and in-game experience, I thought I need to build a new word tagging game platform.
 
 ## What is word tag game?
 
-Word tag game is also known as 'Word chains', 'Last and first', 'Grab on behind' and 'Shiritori'(Japanese).
+Word tag game is also known as 'Word chains', 'Last and first', 'Grab one behind' and 'Shiritori'(Japanese).
 
 ### How it will be going on online?
 

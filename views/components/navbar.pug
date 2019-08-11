@@ -7,5 +7,7 @@ mixin navbar(title, type)
         li(class='navigation-item')
           if type === 'session'
             include ../shards/navitems/session
+          else if type === 'app'
+            include ../shards/navitems/app
           else
             include ../shards/navitems/index

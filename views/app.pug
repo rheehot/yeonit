@@ -3,19 +3,37 @@ extends layout/main
 include components/navbar
 include components/header
 include components/footer
+include shards/blankSection
 include shards/textSection
 include shards/textSectionCenterialized
-include shards/imageSection
-include shards/imageSectionCenterialized
 
 block content
-  +navbar('로그인했다구')
-  
-  +textSectionCenterialized(
-    '아슬아슬한 그 순간',
-    '이제 끝말잇기를 온라인으로 연잇에서 즐겨보세요! 온라인에서 실시간으로 줄어드는 시간 내에 생각나는 단어를 입력해야 합니다.'
+  +navbar('연잇', 'app')
+
+  +blankSection('45')
+  +textSection(
+    '새 게임 시작하기',
+    '연달아 이을준비가 되셨나요? 시작해보세요!'
   )
-  +imageSectionCenterialized(
-    '/images/index-section1.gif'
-  )
+
+  article
+    div.container
+      table
+        thead
+          th 게임
+          th 플레이어
+          th 참가
+        tbody
+          each game in games
+            tr
+              td= game.name
+              td= game.join
+              td
+                a(href='/app/' + game.id) 참가
+          else
+            tr
+              td 현재 참가할 수 있는 게임이 없습니다
+              td &ndash;
+              td &ndash;
+
   +footer()
