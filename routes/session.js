@@ -1,12 +1,12 @@
 const express = require('express')
 const router = express.Router()
 
-const structures = require('../structures')
+const handlers = require('../handlers')
 
-router.get('/', structures.session.main)
-router.get('/revoke', structures.session.destory)
-router.get('/guest', structures.session.guest)
+router.get('/', handlers.session.main)
+router.get('/revoke', handlers.session.destory)
+router.get('/guest', handlers.session.guest)
 
-router.use(structures.page.notFound)
+router.use(handlers.page.notFound)
 
 module.exports = router

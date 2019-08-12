@@ -1,12 +1,12 @@
 const express = require('express')
 const router = express.Router()
 
-const structures = require('../structures')
+const handlers = require('../handlers')
 
-router.use(structures.session.validate)
+router.use(handlers.session.validate)
 
-router.get('/', structures.app.main)
+router.get('/', handlers.app.main)
 
-router.use(structures.page.notFound)
+router.use(handlers.page.notFound)
 
 module.exports = router
