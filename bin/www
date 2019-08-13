@@ -9,6 +9,52 @@ var structures = require('../structures')
 var debug = require('debug')('yeonit:server')
 var http = require('http')
 var socket = require('socket.io')
+var fs = require('fs')
+var path = require('path')
+
+/**
+ * Merge all stylesheets and javascripts into one file.
+ */
+
+var public = path.join(__dirname, '..', 'public')
+var staticsMerged = {
+  javascripts: path.join(public, 'javascripts', 'scripts.js'),
+  stylesheets: path.join(public, 'stylesheets', 'styles.css')
+}
+
+function makefile(files) {
+  files.forEach(function (file) {
+    if (!fs.existsSync(file)) {
+      console.log(file + ' was crated')
+    }
+
+    fs.writeFileSync(file, '', 'utf8')
+  })
+}
+function digger(dir) {
+  console.log('Looking for ' + dir)
+
+  fs.readdirSync(dir).forEach(function (stack) {
+    stackpath = path.join(dir, stack)
+
+    if (fs.existsSync(stackpath) && fs.lstatSync(stackpath).isDirectory()) {
+      digger(stackpath)
+    } else {
+      if (stackpath.endsWith('.css')) {
+        console.log(stackpath + ' is being merged')
+        fs.writeFileSync(staticsMerged.stylesheets, fs.readFileSync(staticsMerged.stylesheets) + ('/* ' + stack + ' */\n' + fs.readFileSync(stackpath) + '\n'), 'utf8')
+      } else if (stackpath.endsWith('.js')) {
+        console.log(stackpath + ' is being merged')
+        fs.writeFileSync(staticsMerged.javascripts, fs.readFileSync(staticsMerged.javascripts) + ('/* ' + stack + ' */\n' + fs.readFileSync(stackpath) + '\n'), 'utf8')
+      }
+    }
+  })
+}
+
+makefile(Object.values(staticsMerged))
+digger(public)
+
+console.log('All statics were merged')
 
 /**
  * Get port from environment and store in Express.
