@@ -4,7 +4,7 @@ const uuidv5 = require('uuid/v5')
 module.exports = function (req, res, next) {
   if (!req.session.yeonit) {
     req.session.yeonit = {
-      uid: 'guest-' + uuidv5('guest', uuidv1())
+      uid: 'guest_' + uuidv5('yeonit.guest', uuidv1())
     }
   }
 
