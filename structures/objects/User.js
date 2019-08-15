@@ -20,6 +20,7 @@ class User {
         this.rate = userdata.rate
 
         this.valid = true
+        this.status = 'idle'
       }
     }
   }
