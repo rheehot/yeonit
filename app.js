@@ -6,12 +6,14 @@ const cookieParser = require('cookie-parser')
 const logger = require('morgan')
 const uuidv4 = require('uuid/v4')
 const uuidv5 = require('uuid/v5')
+const redis = require('connect-redis')
 
 const indexRouter = require('./routes/index')
 const appRouter = require('./routes/app')
 const sessionRouter = require('./routes/session')
 
 const app = express()
+const RedisStore = redis(session)
 
 app.uuid = uuidv4()
 
@@ -25,6 +27,7 @@ app.use(express.urlencoded({ extended: false }))
 app.use(cookieParser())
 app.use(express.static(path.join(__dirname, 'public')))
 app.use(session({
+  store: new RedisStore({}),
   secret: uuidv5('yeonit', app.uuid),
   resave: false,
   saveUninitialized: true,
