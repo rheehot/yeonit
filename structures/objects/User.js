@@ -1,7 +1,7 @@
 const database = require('../database')
 
 class User {
-  constructor(uuid) {
+  constructor (uuid) {
     if (uuid.startsWith('guest_')) {
       this.uuid = uuid
 
@@ -25,7 +25,7 @@ class User {
     }
   }
 
-  integrateMatch(match) {
+  integrateMatch (match) {
     this.match = match
 
     // NOTE: Add match event handling below here;

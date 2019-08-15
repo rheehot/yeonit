@@ -1,10 +1,15 @@
-function rankedQueue(queue, options) {
+function rankedQueue (queue, options) {
+  function validate (n, k) {
+    if (!queue[n + k] || queue[n + k].status !== 'matchmaking') {
+      queue.splice(n + k, 1)
+    }
+
+    validate(n, k)
+  }
   return new Promise(function (resolve, reject) {
-    const isQueueAvailable =
-      (queue) ||
-      (queue.length > options.playersPerMatch)
+    const isQueueAvailable = queue || queue.length > options.playersPerMatch
     if (!isQueueAvailable) {
-      resolve(new Array())
+      resolve([])
     }
 
     queue.sort(function (a, b /* Users */) {
@@ -15,22 +20,14 @@ function rankedQueue(queue, options) {
       queue.reverse()
     }
 
-    const groups = new Array()
+    const groups = []
 
     for (let i = 0; i < queue.length; i++) {
-      groups[i] = new Array()
+      groups[i] = []
 
       for (let k = 0; k < options.playersPerMatch; k++) {
-        let n = i * options.playersPerMatch
-
-        function validate() {
-          if (!queue[n + k] || queue[n + k].status !== 'matchmaking') {
-            queue.splice(queue.indexOf(queue[n + k]), 1)
-          }
-
-          validate()
-        }
-        validate()
+        const n = i * options.playersPerMatch
+        validate(n, k)
 
         groups[i].push(queue[n + k])
       }
