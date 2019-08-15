@@ -5,18 +5,18 @@ const uuidv5 = require('uuid/v5')
 const gamemodes = require('../gamemodes')
 
 class Match {
-  constructor(options) {
-    options = options || new Object()
+  constructor (options) {
+    options = options || {}
 
     this.created = Date.now()
     this.uuid = uuidv5('yeonit.match', uuidv1())
     this.events = new events.EventEmitter()
 
-    this.gamemode = options.gamemode || Object.keys(gamemodes || new Object())[0] // NOTE: Select first gamemode from availables if no gamemode provided.
-    this.players = new Array() // NOTE: Fill players after match created.
+    this.gamemode = options.gamemode || Object.keys(gamemodes || {})[0] // NOTE: Select first gamemode from availables if no gamemode provided.
+    this.players = [] // NOTE: Fill players after match created.
   }
 
-  addUser(player) {
+  addUser (player) {
     if (!player.valid) {
       return
     }
@@ -34,7 +34,8 @@ class Match {
       rate: player.rate
     })
   }
-  removeUser(player) {
+
+  removeUser (player) {
     if (this.players[player.match.index]) {
       this.players.splice(player.match.index, 1)
       this.evetns.emit('player.remove', {
@@ -46,12 +47,13 @@ class Match {
     }
   }
 
-  start(delay) {
+  start (delay) {
     setTimeout(function () {
       this.events.emit('match.start', this.gamemode.config)
     }, (delay || 0) * 1000)
   }
-  end(delay) {
+
+  end (delay) {
     setTimeout(function () {
       this.events.emit('match.end')
     }, (delay || 0) * 1000)

@@ -1,11 +1,11 @@
 const pool = require('./pool')
 
-async function query(sql, bind) {
-  const result = new Object()
+async function query (sql, bind) {
+  const result = {}
 
   try {
     result.type = 0
-    result.data = await pool.execute(sql, bind)[0 /* Zero stands for rows */]
+    result.data = await pool.execute(sql, bind)[0]
 
     if (!result.data) {
       result.type = -1
