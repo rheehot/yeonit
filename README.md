@@ -4,11 +4,12 @@
 
 This GitHub opensource repository is for Online word tagging game platform, Yeonit.
 
-- Spoken as 'Yeon-it'
+- Spoken as 'Yeon-nit'
 
 ## Table of Content
 
 - [Concept](#Concept)
+- [Copyright](#Copyright)
 
 ---
 
@@ -29,3 +30,20 @@ It is including simple rules. However, the game will get harder as the game goes
 ## Changes from 'Kkutu'(prototype)
 
 Our main goal is a healthy community of the game and project. The prototype software of current project called 'Kkutu' is also one of word tag game platform. However, its community is suffering from a lot of community-based crackers and poor in-game experiences.
+
+# Copyright
+
+The copyright problem is often occurring in the open-source project. You should protect the copyright of contributors worked on this project. Also, you can contact the copyright holder and agents who worked on this project. If you have anything want to report, please contact [copyright holders](#Copyright-holders) or submit an issue.
+
+- This repository is under [AGPL v3](./LICENSE).
+
+*All links refer to an email address.*
+
+## Copyright holders
+
+- [Seia-Soto](mailto:seia@outlook.kr)
+- [Helloyunho](mailto:yunho050840@gmail.com)
+
+## Contributors
+
+There is no contributors except for above copyright holders.
