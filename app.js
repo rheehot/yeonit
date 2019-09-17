@@ -6,11 +6,12 @@ const path = require('path')
 const cookieParser = require('cookie-parser')
 const uuidv4 = require('uuid/v4')
 const http = require('http')
-const socket = require('socket')
+const socket = require('socket.io')
 const redis = require('redis')
 const redisSession = require('connect-redis')
 const redisSocket = require('socket.io-redis')
 
+const structures = require('./structures')
 const preferences = require('./preferences')
 
 const indexRouter = require('./routes/index')
@@ -44,7 +45,7 @@ app.use(session({
     ttl: 260,
     prefix: 'yeonit_sess:'
   }),
-  secret: preferences.app.session.secret,
+  secret: preferences.session.secret,
   resave: false,
   saveUninitialized: true,
   cookie: {
