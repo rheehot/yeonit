@@ -1,6 +1,6 @@
 const pool = require('./pool')
 
-async function query (sql, bind) {
+const query = async (sql, bind) => {
   const result = {}
 
   try {

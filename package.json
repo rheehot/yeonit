@@ -1,9 +1,9 @@
 {
   "name": "yeonit",
-  "version": "0.0.0",
-  "private": true,
+  "version": "0.0.1",
+  "private": false,
   "scripts": {
-    "start": "node ./bin/www"
+    "start": "node ./app.js"
   },
   "dependencies": {
     "connect-redis": "^3.4.2",
@@ -12,12 +12,12 @@
     "express": "~4.16.1",
     "express-session": "^1.16.2",
     "http-errors": "~1.6.3",
-    "morgan": "~1.9.1",
-    "mysql2": "^1.6.5",
+    "mysql2": "^1.7.0",
     "pug": "^2.0.4",
     "redis": "^2.8.0",
     "socket.io": "^2.2.0",
+    "socket.io-redis": "^5.2.0",
     "sqwish": "^0.2.2",
-    "uuid": "^3.3.2"
+    "uuid": "^3.3.3"
   }
 }

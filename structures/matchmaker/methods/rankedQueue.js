@@ -1,18 +1,19 @@
-function rankedQueue (queue, options) {
-  function validate (n, k) {
+const rankedQueue = (queue, options) => {
+  const validate = (n, k) => {
     if (!queue[n + k] || queue[n + k].status !== 'matchmaking') {
       queue.splice(n + k, 1)
     }
 
     validate(n, k)
   }
-  return new Promise(function (resolve, reject) {
+
+  return new Promise((resolve, reject) => {
     const isQueueAvailable = queue || queue.length > options.playersPerMatch
     if (!isQueueAvailable) {
       resolve([])
     }
 
-    queue.sort(function (a, b /* Users */) {
+    queue.sort((a, b /* Users */) => {
       return a.rate - b.rate
     })
 

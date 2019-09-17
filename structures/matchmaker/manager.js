@@ -19,7 +19,7 @@ class MatchmakingManager {
 
     this.queue = []
 
-    setInterval(async function () {
+    setInterval(async () => {
       if (this.queue.length >= this.playersPerMatch) {
         const groups = await this.method(this.queue, {
           descend: this.alignDescend,
