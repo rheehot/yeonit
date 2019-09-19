@@ -12,7 +12,7 @@ const redisSession = require('connect-redis')
 const redisSocket = require('socket.io-redis')
 
 const structures = require('./structures')
-const preferences = require('./preferences')
+const config = require('./config')
 
 const indexRouter = require('./routes/index')
 const appRouter = require('./routes/app')
@@ -45,7 +45,7 @@ app.use(session({
     ttl: 260,
     prefix: 'yeonit_sess:'
   }),
-  secret: preferences.session.secret,
+  secret: config.session.secret,
   resave: false,
   saveUninitialized: true,
   cookie: {
@@ -91,7 +91,7 @@ server.on('listening', () => {
 
   debug('Listening on ' + bind)
 })
-server.listen(preferences.service.port)
+server.listen(config.service.port)
 
 module.exports = app
 module.exports.io = io

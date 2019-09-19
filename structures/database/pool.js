@@ -1,5 +1,5 @@
 const mysql = require('mysql2/promise')
 
-const preferences = require('../../preferences')
+const config = require('../../config')
 
-module.exports = mysql.createPool(preferences.database)
+module.exports = mysql.createPool(config.database)
