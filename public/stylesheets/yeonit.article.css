@@ -8,3 +8,7 @@ article {
 article.center {
   text-align: center;
 }
+
+span.onwhite {
+  background-color: white;
+}
