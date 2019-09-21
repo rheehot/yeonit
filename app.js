@@ -1,4 +1,3 @@
-const createError = require('http-errors')
 const debug = require('debug')
 const express = require('express')
 const session = require('express-session')
@@ -21,13 +20,14 @@ const sessionRouter = require('./routes/session')
 const app = express()
 const server = http.createServer(app)
 const redisClient = redis.createClient()
-const redisStore = redisSession(session)
+const RedisStore = redisSession(session)
 const io = socket(server, {
   transports: ['websocket', 'polling']
 })
 
 // NOTE: Configure Express.JS application:
-app.uuid = uuidv4()
+app.set('uuid', uuidv4())
+app.set('config', config)
 
 app.set('views', path.join(__dirname, 'views'))
 app.set('view engine', 'pug')
@@ -38,7 +38,7 @@ app.use(express.urlencoded({ extended: false }))
 app.use(cookieParser())
 app.use(express.static(path.join(__dirname, 'public')))
 app.use(session({
-  store: new redisStore({
+  store: new RedisStore({
     host: 'localhost',
     port: 6379,
     client: redisClient,
@@ -62,12 +62,11 @@ app.use((req, res, next) => {
   res.status(404).end()
 })
 app.use((err, req, res, next) => {
-  /*
   res.locals.message = err.message
   res.locals.error = req.app.get('env') === 'development' ? err : {}
-  */
 
   res.status(err.status || 500)
+  res.json(res.locals).end()
 })
 
 // NOTE: Configure Socket.IO application:

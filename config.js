@@ -1,7 +1,8 @@
 module.exports = {
   service: {
     port: 3006,
-    mode: 'development'
+    mode: 'development',
+    name: '연잇'
   },
   session: {
     secret: 'yeonit'
@@ -13,5 +14,15 @@ module.exports = {
     user: '',
     password: '',
     database: '' // NOTE: Name of database.
+  },
+  user: {
+    classes: [
+      {
+        name: 'guest',
+        level: 0
+      }
+    ],
+    admins: [],
+    ranks: []
   }
 }
