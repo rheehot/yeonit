@@ -16,13 +16,28 @@ module.exports = {
     database: '' // NOTE: Name of database.
   },
   user: {
+    options: {
+      registerAs: 'default'
+    },
     classes: [
       {
         name: 'guest',
         level: 0
+      },
+      {
+        name: 'default',
+        level: 1
+      },
+      {
+        name: 'admin',
+        level: 2
       }
     ],
-    admins: [],
-    ranks: []
+    ranks: [
+      {
+        name: 'unranked',
+        level: 0
+      }
+    ]
   }
 }
