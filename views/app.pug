@@ -1,8 +1,6 @@
 extends layout/main
-
 include components/navbar
 include components/header
-include components/footer
 include shards/blankSection
 include shards/buttonDefault
 include shards/imageSection
@@ -19,10 +17,16 @@ block content
       center
         img.block(src='https://avatars0.githubusercontent.com/u/53952246')
 
-  +textSectionCenterialized(
-    '게스트 세션',
-    '게스트 세션에서는 플레이 정보가 유지되지 않습니다.'
-  )
+  if session.yeonit.uid.startsWith('guest_')
+    +textSectionCenterialized(
+      '게스트 세션',
+      '게스트 세션에서는 플레이 정보가 유지되지 않습니다.'
+    )
+  else
+    +textSectionCenterialized(
+      session.yeonit.username + '님, 반갑습니다',
+      '아래에서 원하는 게임모드를 선택하여 연잇을 시작해보세요.'
+    )
 
   article
     div.container
@@ -43,5 +47,3 @@ block content
               td 현재 참가할 수 있는 게임이 없습니다
               td &ndash;
               td &ndash;
-
-  +footer()

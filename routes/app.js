@@ -2,8 +2,9 @@ const express = require('express')
 const router = express.Router()
 
 const handlers = require('../handlers')
+const middlewares = require('../middlewares')
 
-router.use(handlers.session.validate)
+router.use(middlewares.session.validate)
 
 router.get('/', handlers.app.main)
 

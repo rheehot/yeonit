@@ -1,4 +1,5 @@
 module.exports.destory = require('./destory')
 module.exports.guest = require('./guest')
 module.exports.main = require('./main')
+module.exports.new = require('./new')
 module.exports.validate = require('./validate')

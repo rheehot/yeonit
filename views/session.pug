@@ -2,7 +2,6 @@ extends layout/main
 
 include components/navbar
 include components/header
-include components/footer
 include shards/blankSection
 include shards/emptySection
 include shards/buttonDefault
@@ -22,5 +21,3 @@ block content
   article.center
     div(class='container')
       +buttonDefault('게스트로 로그인', '/session/guest', 'fas fa-user')
-
-  +footer()
