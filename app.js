@@ -9,6 +9,7 @@ const socket = require('socket.io')
 const redis = require('redis')
 const redisSession = require('connect-redis')
 const redisSocket = require('socket.io-redis')
+const passport = require('passport')
 
 const structures = require('./structures')
 const config = require('./config')
@@ -53,6 +54,8 @@ app.use(session({
     maxAge: 1000 * 60 * 60 * 3
   }
 }))
+app.use(passport.initialize())
+app.use(passport.session())
 
 app.use('/', indexRouter)
 app.use('/app', appRouter)
@@ -77,6 +80,9 @@ io.adapter(redisSocket({
 }))
 
 structures.socket.applicate(io)
+
+// NOTE: Configure passport authentication:
+structures.authentication.applicate(app)
 
 // NOTE: Configure debugger:
 debug('yeonit:server')

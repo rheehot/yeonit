@@ -15,18 +15,12 @@ block content
   article
     div.container
       center
-        img.block(src='https://avatars0.githubusercontent.com/u/53952246')
+        img.block(src=user.photos[0].value)
 
-  if session.yeonit.uid.startsWith('guest_')
-    +textSectionCenterialized(
-      '게스트 세션',
-      '게스트 세션에서는 플레이 정보가 유지되지 않습니다.'
-    )
-  else
-    +textSectionCenterialized(
-      session.yeonit.username + '님, 반갑습니다',
-      '아래에서 원하는 게임모드를 선택하여 연잇을 시작해보세요.'
-    )
+  +textSectionCenterialized(
+    user.displayName + '님, 반갑습니다',
+    '아래에서 원하는 게임모드를 선택하여 연잇을 시작해보세요.'
+  )
 
   article
     div.container
