@@ -41,6 +41,16 @@ module.exports = {
         name: 'unranked',
         level: 0
       }
+    ],
+    status: [
+      {
+        name: 'offline',
+        value: 0
+      },
+      {
+        name: 'online',
+        value: 1
+      }
     ]
   }
 }

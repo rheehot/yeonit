@@ -2,7 +2,13 @@ const passport = require('passport')
 
 const GoogleStrategy = require('passport-google-oauth')
 
-passport.serializeUser((user, done) => done(null, user))
+const database = require('../database')
+
+passport.serializeUser(async (user, done) => {
+  user = await database.serialize.syncUser(user)
+
+  done(null, user)
+})
 passport.deserializeUser((obj, done) => done(null, obj))
 
 module.exports = app => {
