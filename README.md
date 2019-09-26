@@ -2,13 +2,12 @@
 
 **연달아 이어가는 우리의 끝말잇기 이야기, 연잇.**
 
-This GitHub opensource repository is for Online word tagging game platform, Yeonit.
-
-- Spoken as 'Yeon-nit'
+This GitHub opensource repository is for the Online word tagging game platform, Yeonit.
 
 ## Table of Content
 
 - [Concept](#Concept)
+- [Installation](#Installation)
 - [Copyright](#Copyright)
 
 ---
@@ -17,7 +16,7 @@ This GitHub opensource repository is for Online word tagging game platform, Yeon
 
 Our prototype is the one of online word tagging platforms 'Kkutu'. However, to improve the outline of the game and in-game experience, I thought I need to build a new word tagging game platform.
 
-## What is word tag game?
+## What is the word tag game?
 
 Word tag game is also known as 'Word chains', 'Last and first', 'Grab one behind' and 'Shiritori'(Japanese).
 
@@ -29,11 +28,151 @@ It is including simple rules. However, the game will get harder as the game goes
 
 ## Changes from 'Kkutu'(prototype)
 
-Our main goal is a healthy community of the game and project. The prototype software of current project called 'Kkutu' is also one of word tag game platform. However, its community is suffering from a lot of community-based crackers and poor in-game experiences.
+Our main goal is a healthy community of the game and project. The prototype software of the current project called 'Kkutu' is also one of the word tag game platforms. However, its community is suffering from a lot of community-based crackers and poor in-game experiences.
+
+# Installation
+
+To install the application, you need to get basic things(as of latest stable version) specified below(bold item is essential):
+
+- **[Node.JS](http://nodejs.org)**, you can [install via Package Manager](https://nodejs.org/en/download/package-manager/).
+  - **[NPM](https://docs.npmjs.com)**, installed with Node.JS
+- **[Redis](https://redis.io/download)**, to store application data
+- **[MySQL](https://www.mysql.com/downloads/)** or **[MariaDB](https://mariadb.org/download/)**
+- [Nginx](https://nginx.org/en/download.html), highly recommended for security.
+- [PM2](http://pm2.keymetrics.io/docs/usage/pm2-doc-single-page/#installation), highly recommended for clustering.
+- [Git SCM](https://git-scm.com/downloads), for cloning this project.
+
+## Installation guide
+
+This guide will explain how to set up `Yeonit` on your server using Ubuntu version 18.04.
+
+1. Get super-user permission on your shell
+
+You need to get permission to use `sudo`. If you don't want to use the below command(`sudo su`), you can prefix commands with `sudo` instead.
+
+```shell
+sudo su
+```
+
+2. Update your system (optional, highly recommended)
+
+Commonly, we need to update the system to the latest version for stability.
+
+```shell
+apt update -y
+apt upgrade -y
+```
+
+3. Install required packages into the system
+
+In this time, we're going to use Nginx for our proxy server of Express.JS. Also, as I specified the link that explaining how to install Node.JS via the package manager, we need to set up the source of the package(Node.JS) first.
+
+```shell
+curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
+
+apt install nginx mariadb-server redis-server nodejs -y
+```
+
+After we installed the required packages, we need to set up them as service. The command below will make your system to start the packages on boot.
+
+```shell
+systemctl enable redis-server.service
+systemctl enable mariadb
+systemctl enable nginx
+```
+
+4. Set up the database
+
+Starting with the database, I am recommending you to reply to all options with `y`.
+
+```shell
+mysql_secure_installation
+```
+
+After you set up the basic environment of the MySQL database, make a new database for `Yeonit` and create required tables.
+
+```shell
+mariadb
+```
+
+- On SQL shell:
+
+```sql
+create database yeonit;
+
+-- specified in %YEONIT_REPO%/etc/sql/create-yeonit_users.sql
+CREATE TABLE `yeonit`.`yeonit_users` ( `identify` INT(11) NOT NULL AUTO_INCREMENT , `tag` VARCHAR(32) NOT NULL , `name` VARCHAR(64) NOT NULL , `avatar` VARCHAR(256) NOT NULL , `experience` INT(11) NOT NULL , `matchmakingRate` INT(11) NOT NULL DEFAULT '0' , `playedMatches` INT(11) NOT NULL , `createdTime` VARCHAR(32) NOT NULL , `lastSeenTime` VARCHAR(32) NOT NULL , `wonMatches` INT(11) NOT NULL , `defeatMatches` INT(11) NOT NULL , `blocked` TINYINT(1) NOT NULL DEFAULT '0' , `blockedReason` VARCHAR(2048) NOT NULL , `blockedUntil` VARCHAR(32) NOT NULL , `permission` INT(11) NOT NULL , `email` VARCHAR(320) NOT NULL , `status` INT(11) NOT NULL , `mobile` TINYINT(1) NOT NULL DEFAULT '0' , PRIMARY KEY (`identify`)) ENGINE = InnoDB;
+
+ALTER TABLE `yeonit`.`yeonit_users` ADD UNIQUE(`identify`);
+ALTER TABLE `yeonit`.`yeonit_users` ADD `locale` VARCHAR(16) NOT NULL AFTER `mobile`;
+ALTER TABLE `yeonit`.`yeonit_users` ADD `provider` VARCHAR(32) NOT NULL AFTER `locale`;
+ALTER TABLE `yeonit`.`yeonit_users` ADD `providerIdentify` VARCHAR(32) NOT NULL AFTER `provider`;
+ALTER TABLE `yeonit`.`yeonit_users` DROP `mobile`;
+```
+
+5. Set up the project
+
+Now, we're going to work with Node.JS. Before, we start, install PM2 to cluster and run 24/7 the application.
+
+```shell
+npm install -g pm2
+```
+
+After you installed the PM2, clone the `Yeonit` and install dependencies.
+
+```shell
+git clone https://github.com/yeonit/yeonit.git
+cd yeonit
+
+# in the folder `yeonit`
+npm install
+```
+
+6. Configure the application options and start the application
+
+Copy the sample config file and edit the new config.
+
+- **You need to [get the Google credential API key and secret](https://console.developers.google.com/apis/credentials).** (Use `https://YOUR_ADDRESS.TLD/session/authentication/google/callback` for authorized redirection URI)
+- **You must change the value of `session.secret` to prevent security issues about the session.**
+
+```shell
+cp config.sample.js config.js
+vim config.js
+```
+
+So far, we set up the environment, and now, we can start the application.
+
+```shell
+# Using PM2 with clustering 4 processes
+pm2 start app.js --name yeonit -i 4
+
+# Commonly
+npm start
+```
+
+7. Include Nginx config file into your virtual host config (optional, highly recommended)
+
+```nginx
+server {
+  listen 80;
+
+  ...
+
+  location / {
+    include %PATH_TO_REPO%/.nginx.conf;
+  }
+}
+```
+
+After you include your settings, reload the Nginx with the new config.
+
+```shell
+service nginx reload
+```
 
 # Copyright
 
-The copyright problem is often occurring in the open-source project. You should protect the copyright of contributors worked on this project. Also, you can contact the copyright holder and agents who worked on this project. If you have anything want to report, please contact [copyright holders](#Copyright-holders) or submit an issue.
+The copyright problem is often occurring in the open-source project. You should protect the copyright of contributors who worked on this project. Also, you can contact the copyright holder and agents who worked on this project. If you have anything you want to report, please contact [copyright holders](#Copyright-holders) or submit an issue.
 
 - This repository is under [AGPL v3](./LICENSE).
 
@@ -46,4 +185,4 @@ The copyright problem is often occurring in the open-source project. You should 
 
 ## Contributors
 
-There is no contributors except for above copyright holders.
+There are no contributors except for the above copyright holders.
