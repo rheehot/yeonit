@@ -4,8 +4,7 @@ include components/navbar
 include components/header
 include shards/blankSection
 include shards/emptySection
-include shards/buttonDefault
-include shards/buttonTwitter
+include shards/buttonGoogle
 include shards/textSection
 include shards/textSectionCenterialized
 
@@ -20,4 +19,4 @@ block content
 
   article.center
     div(class='container')
-      +buttonDefault('Google로 로그인', '/session/authentication/google', 'fab fa-google')
+      +buttonGoogle('Google 계정으로 로그인', '/session/authentication/google')
