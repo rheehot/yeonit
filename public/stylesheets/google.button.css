@@ -1,0 +1,50 @@
+/*
+Google Identity and Google+ Sign in buttons
+https://developers.google.com/+/branding-guidelines
+
+From codepen: https://codepen.io/timlayton/pen/gppWqz
+*/
+
+.google-button {
+  height: 40px !important;
+  border-width: 0 !important;
+  background: white !important;
+  color: #737373 !important;
+  border-radius: 5px !important;
+  white-space: nowrap !important;
+  box-shadow: 1px 1px 0px 1px rgba(0, 0, 0, 0.05) !important;
+  transition-property: background-color, box-shadow !important;
+  transition-duration: 150ms !important;
+  transition-timing-function: ease-in-out !important;
+  padding: 0 !important;
+}
+.google-button:focus, .google-button:hover {
+  box-shadow: 1px 4px 5px 1px rgba(0, 0, 0, 0.1) !important;
+}
+.google-button:active {
+  background-color: #e5e5e5 !important;
+  box-shadow: none !important;
+  transition-duration: 10ms !important;
+}
+
+.google-button__icon {
+  display: inline-block !important;
+  vertical-align: middle !important;
+  margin: 0/*@Seia-Soto EDIT: 8px*/ 0 8px 8px !important;
+  width: 18px !important;
+  height: 18px !important;
+  box-sizing: border-box !important;
+}
+
+.google-button__icon--plus {
+  width: 27px !important;
+}
+
+.google-button__text {
+  display: inline-block !important;
+  vertical-align: middle !important;
+  padding: 0 24px !important;
+  font-size: 14px !important;
+  font-weight: bold !important;
+  font-family: 'Roboto',arial,sans-serif !important;
+}
