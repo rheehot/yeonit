@@ -4,8 +4,7 @@ include components/navbar
 include components/header
 include shards/blankSection
 include shards/emptySection
-include shards/buttonDefault
-include shards/buttonTwitter
+include shards/buttonGoogle
 include shards/textSection
 include shards/textSectionCenterialized
 
@@ -15,9 +14,9 @@ block content
   +blankSection('45')
   +textSectionCenterialized(
     '로그인',
-    '연잇은 아직 게스트 모드 밖에 지원하지 않습니다.'
+    '소셜 계정으로 연잇에 로그인하여 시작하세요.'
   )
-  
+
   article.center
     div(class='container')
-      +buttonDefault('게스트로 로그인', '/session/guest', 'fas fa-user')
+      +buttonGoogle('Google 계정으로 로그인', '/session/authentication/google')

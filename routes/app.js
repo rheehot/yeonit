@@ -4,7 +4,7 @@ const router = express.Router()
 const handlers = require('../handlers')
 const middlewares = require('../middlewares')
 
-router.use(middlewares.session.validate)
+router.use(middlewares.session.ensureAuthenticated)
 
 router.get('/', handlers.app.main)
 

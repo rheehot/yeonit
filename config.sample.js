@@ -4,6 +4,13 @@ module.exports = {
     mode: 'development',
     name: '연잇'
   },
+  authentication: {
+    google: {
+      clientID: '',
+      clientSecret: '',
+      callbackURL: ''
+    }
+  },
   session: {
     secret: 'yeonit'
   },
@@ -21,22 +28,28 @@ module.exports = {
     },
     classes: [
       {
-        name: 'guest',
+        name: 'default',
         level: 0
       },
       {
-        name: 'default',
-        level: 1
-      },
-      {
         name: 'admin',
-        level: 2
+        level: 1
       }
     ],
     ranks: [
       {
         name: 'unranked',
         level: 0
+      }
+    ],
+    status: [
+      {
+        name: 'offline',
+        value: 0
+      },
+      {
+        name: 'online',
+        value: 1
       }
     ]
   }
