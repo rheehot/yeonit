@@ -7,8 +7,9 @@ This GitHub opensource repository is for the Online word tagging game platform, 
 ## Table of Content
 
 - [Concept](#Concept)
-- [Installation](#Installation)
 - [Copyright](#Copyright)
+- [Installation](#Installation)
+- [Development](#Development)
 
 ---
 
@@ -29,6 +30,23 @@ It is including simple rules. However, the game will get harder as the game goes
 ## Changes from 'Kkutu'(prototype)
 
 Our main goal is a healthy community of the game and project. The prototype software of the current project called 'Kkutu' is also one of the word tag game platforms. However, its community is suffering from a lot of community-based crackers and poor in-game experiences.
+
+# Copyright
+
+The copyright problem is often occurring in the open-source project. You should protect the copyright of contributors who worked on this project. Also, you can contact the copyright holder and agents who worked on this project. If you have anything you want to report, please contact [copyright holders](#Copyright-holders) or submit an issue.
+
+- This repository is under [AGPL v3](./LICENSE).
+
+*All links refer to an email address.*
+
+## Copyright holders
+
+- [Seia-Soto](mailto:seia@outlook.kr)
+- [Helloyunho](mailto:yunho050840@gmail.com)
+
+## Contributors
+
+There are no contributors except for the above copyright holders.
 
 # Installation
 
@@ -170,19 +188,39 @@ After you include your settings, reload the Nginx with the new config.
 service nginx reload
 ```
 
-# Copyright
+# Development
 
-The copyright problem is often occurring in the open-source project. You should protect the copyright of contributors who worked on this project. Also, you can contact the copyright holder and agents who worked on this project. If you have anything you want to report, please contact [copyright holders](#Copyright-holders) or submit an issue.
+The development documentation for this project.
 
-- This repository is under [AGPL v3](./LICENSE).
+## Table of Contents in Development
 
-*All links refer to an email address.*
+- [Development rules](#Development-rules)
+- [Application structure](#Application-structure)
+- [Routings](#Routings)
 
-## Copyright holders
+## Development rules
 
-- [Seia-Soto](mailto:seia@outlook.kr)
-- [Helloyunho](mailto:yunho050840@gmail.com)
+- You may set up the project following the installation guide above.
+- You have to install Linter with `standard.js` configuration and keep the rules.
+- You may check the `yarn.lock` file before you start because it is not sure if it is up to date.
+- You're recommended to develop with the latest version of Node.JS and its dependencies. (Allowed to update packages with PRs, but for clean code, I recommend updating dependencies every new release)
+- You must use 2 spaces for indent config.
+- You're recommended to create modules to reduce errors from each logic, but make sure it is working. If you don't sure, please contact co-workers and request reviews to prevent hard debugging on other logics' errors.
 
-## Contributors
+## Application structure
 
-There are no contributors except for the above copyright holders.
+The main entry point of this project is `app.js` as specified in `npm start` command.
+
+| Name of folder(or modules) | Description                                         |
+|-:--------------------------|-:---------------------------------------------------|
+| etc                        | Content which is not belong to the logical sources. |
+| handlers                   | Handler functions of Express.JS routers.            |
+| middlewares                | Middlewares of Express.JS, not handlers at the end. |
+| public                     | Static contents, not belong to server-side sources. |
+| routes                     | Routers of Express.JS.                              |
+| structures                 | A set of functional sources.                        |
+| views                      | HTML rendering scripts(pug.js).                     |
+
+## Routings
+
+(N/A yet)
