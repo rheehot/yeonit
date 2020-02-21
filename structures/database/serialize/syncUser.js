@@ -4,12 +4,12 @@ const knex = require('../knex')
 const emptyFunction = (e) => console.log(e)
 
 module.exports = async user => {
-  const salts = await {
+  const salts = {
     currentTime: Date.now()
   }
   const keys = await serializer[user.provider](salts, user)
 
-  const _result = await knex('yeonit_users')
+  const _result = await knex('users')
     .where({
       provider: user.provider,
       providerIdentify: user.id
@@ -21,7 +21,7 @@ module.exports = async user => {
       email: keys.email
     })
     .catch(emptyFunction) ||
-  await knex('yeonit_users')
+  await knex('users')
     .insert(keys)
     .catch(emptyFunction)
 
@@ -31,7 +31,7 @@ module.exports = async user => {
       provider: user.provider,
       providerIdentify: user.id
     })
-    .from('yeonit_users')
+    .from('users')
 
   return result[0]
 }

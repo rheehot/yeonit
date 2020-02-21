@@ -6,11 +6,13 @@
   "repository": "https://github.com/yeonit/yeonit",
   "license": "agpl-3.0",
   "scripts": {
-    "start": "node ./app.js"
+    "start": "cross-env DEBUG=yeonit* node ./app.js",
+    "debug": "cross-env DEBUG=* node ./app.js"
   },
   "dependencies": {
     "connect-redis": "^3.4.2",
     "cookie-parser": "~1.4.4",
+    "cross-env": "^7.0.0",
     "debug": "~2.6.9",
     "express": "~4.16.1",
     "express-session": "^1.16.2",
@@ -22,6 +24,7 @@
     "redis": "^2.8.0",
     "socket.io": "^2.2.0",
     "socket.io-redis": "^5.2.0",
+    "sqlite3": "^4.1.1",
     "sqwish": "^0.2.2",
     "uuid": "^3.3.3"
   },
