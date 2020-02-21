@@ -84,9 +84,6 @@ structures.socket.applicate(io)
 // NOTE: Configure passport authentication:
 structures.authentication.applicate(app)
 
-// NOTE: Configure debugger:
-debug('yeonit:server')
-
 // NOTE: Configure HTTP server application:
 server.on('listening', () => {
   const addr = server.address()
@@ -96,7 +93,15 @@ server.on('listening', () => {
 
   debug('Listening on ' + bind)
 })
-server.listen(config.service.port)
+
+const initFn = async () => {
+  // NOTE: Create database tables:
+  await structures.database.functions.autofill()
+
+  server.listen(config.service.port)
+}
+
+initFn()
 
 module.exports = app
 module.exports.io = io

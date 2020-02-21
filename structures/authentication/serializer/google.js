@@ -4,15 +4,15 @@ const config = require('../../../config')
 
 module.exports = (salts, user) => {
   const keys = {
-    identify: 0,
+    id: 0,
     tag: crypto.createHash('md5').update(user.displayName + salts.currentTime).digest('hex'),
     name: user.displayName,
     avatar: user.photos[0].value,
     experience: 0,
     matchmakingRate: 0,
     playedMatches: 0,
-    createdTime: salts.currentTime,
-    lastSeenTime: salts.currentTime,
+    createdAt: salts.currentTime,
+    lastSeenAt: salts.currentTime,
     wonMatches: 0,
     defeatMatches: 0,
     blocked: 0,
