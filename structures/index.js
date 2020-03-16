@@ -1,6 +1,0 @@
-module.exports.authentication = require('./authentication')
-module.exports.database = require('./database')
-module.exports.gamemodes = require('./gamemodes')
-module.exports.matchmaker = require('./matchmaker')
-module.exports.objects = require('./objects')
-module.exports.socket = require('./socket')
