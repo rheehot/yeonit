@@ -4,5 +4,14 @@
   "main": "index.js",
   "repository": "https://github.com/Seia-Soto/yeonit.git",
   "author": "Seia-Soto <seia@outlook.kr>",
-  "license": "MIT"
+  "license": "MIT",
+  "scripts": {
+    "debug": "cross-env ENV=DEVELOPMENT DEBUG=* node .",
+    "start": "cross-env ENV=DEVELOPMENT DEBUG=yeonit* node ."
+  },
+  "dependencies": {
+    "cross-env": "^7.0.2",
+    "debug": "^4.1.1",
+    "koa": "^2.11.0"
+  }
 }
