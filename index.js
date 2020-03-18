@@ -13,13 +13,17 @@ const app = new Koa()
 const log = debug(pkg.name)
 const session = useSession({
   prefix: config.app.session.prefix,
-  store: redisStore(config.app.session.redis)
+  store: config.app.session.redis
+    ? log('using redis store as session store') && redisStore(config.app.session.redis)
+    : log('using internal memory store as session store because the redis config was not provided')
 })
 
 if (!config.app.key || !config.app.key.length) {
   log('the cookie keys will set as randomized value with uuid format because it was not provided in config')
 
-  app.keys = [v1()]
+  app.keys = [
+    v1()
+  ]
 }
 
 app.context.log = log
