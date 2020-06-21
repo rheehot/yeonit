@@ -42,7 +42,6 @@ The copyright problem is often occurring in the open-source project. You should 
 ## Copyright holders
 
 - [Seia-Soto](mailto:seia@outlook.kr)
-- [Helloyunho](mailto:yunho050840@gmail.com)
 
 ## Contributors
 
