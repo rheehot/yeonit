@@ -11,10 +11,19 @@ const app = new Koa()
 app.key = v1()
 
 const initFn = async () => {
-  if (!process.env.pm_id) {
-    // NOTE: Fork many as processor count if the app is not running on PM2 cluster mode.
-    if (typeof process.env.pm_id === 'undefined' && cluster.isMaster) {
-      const instanceSize = process.env.instances || os.cpus().length
+  const isMaster =
+    (cluster.isMaster) ||
+    (Number(process.env.pm_id) === 0)
+  const isPM2Instance = !isNaN(Number(process.env.pm_id))
+
+  if (isMaster) {
+    if (cluster.isMaster) {
+      // NOTE: Master-only tasks. (cluster)
+      let instanceSize = process.env.instances || os.cpus().length
+
+      if (instanceSize < 0) {
+        instanceSize = 1
+      }
 
       log('heuristic: forking instances manually because this process did not run in the cluster mode of PM2')
 
@@ -31,10 +40,8 @@ const initFn = async () => {
       })
     }
 
-    // TODO: Master-only tasks.
-  }
-  if (process.env.pm_id || !cluster.isMaster) {
-    // NOTE: Worker-only tasks.
+    // NOTE: Master-only tasks. (all)
+  } else if (isPM2Instance || !isMaster) {
     log(`new worker instance (pid: ${process.pid}) created`)
 
     app
