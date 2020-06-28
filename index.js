@@ -47,7 +47,7 @@ const initFn = async () => {
     app
       .use(routers.routes())
       .use(routers.allowedMethods())
-      .listen(process.env.port || 3000, () => log('new `yeonit` API server instance started running'))
+      .listen(process.env.port || 4000, () => log('new `yeonit` API server instance started running'))
   }
 }
 
